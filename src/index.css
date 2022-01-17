@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+#searchField::placeholder {
+  font-size: 10;
+  color: lightgrey;
+}

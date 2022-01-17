@@ -1,24 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { CSSProperties } from 'react';
 import './App.css';
+import { topHeader } from './theme/theme';
+import { ReactComponent as Logo } from "./immo-logo.svg"
+import { header } from './content/content';
+import { SearchContainer } from "./components/SearchContainer"
 
-function App() {
+const headerContainer = {
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  paddingTop: 10,
+}
+
+const logoContainer = {
+  position: "relative"
+}
+
+const headerStyle = {
+  background: topHeader,
+  width: 1100,
+  height: "80px",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  fontWeight: "bold",
+  fontSize: 20
+}
+
+const logo = {
+  height: 80,
+  width: 80,
+  position: "absolute",
+  top: "1px",
+  right: "400px",
+  border: "4px solid white"
+}
+
+function App ()
+{
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div style={ headerContainer as CSSProperties }>
+        <header style={ headerStyle as CSSProperties }><div style={ logoContainer as CSSProperties }><Logo style={ logo as React.CSSProperties } /></div>{ header }
+        </header>
+        <SearchContainer />
+      </div>
     </div>
   );
 }
