@@ -2,7 +2,6 @@ import { fetchProperties, fetchPropertyDetails, getAvailablePropertyTypes } from
 
 export const searchApiFetch = async ( address: string, propertyType?: string | undefined ) =>
 {
-        console.log("input searchApi", address );
 
     let res;
 
@@ -12,7 +11,6 @@ export const searchApiFetch = async ( address: string, propertyType?: string | u
 
 export const searchApiDetails = async ( propertyId: string ) =>
 {
-        console.log("input searchApi", propertyId );
 
     let res;
 

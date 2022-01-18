@@ -5,6 +5,8 @@ import { Selection } from './Selection';
 import { searchApiFetch, searchApiDetails } from './../services/searchApi';
 import { PropertiesListEntry } from '../services/api';
 import { PropertyFilter } from './PropertyFilter';
+import { TailSpin } from 'react-loader-spinner'
+
 
 const container = {
     width: "1000px",
@@ -40,7 +42,9 @@ export const SearchContainer = () =>
     const [ filter, setFilter ] = useState( "" );
     const [ selection, setSelection ] = useState( [] );
     const [ lastSearch, setLastSearch ] = useState( "" );
+    const [ loading, setLoading ] = useState( false );
     const [ error, setError ] = useState( "" );
+
 
     useEffect( () =>
     {
@@ -48,13 +52,11 @@ export const SearchContainer = () =>
         {
             try
             {
-
-
-                console.log( "FROM CONTAINER", lastSearch, filter )
+                setLoading( true );
                 const res = await searchApiFetch( lastSearch, filter );
-
                 if ( Object.keys( res ).length )
                 {
+                    setLoading( false );
                     const detailedArr = await getDetailedArr( res.properties );
                     setSearchRes( detailedArr );
 
@@ -74,14 +76,11 @@ export const SearchContainer = () =>
 
     const getDetailedArr = async ( arr: any ) =>
     {
-        console.log( "ARR", arr );
         const resArr = [];
         for ( let i = 0; i < arr.length; i++ )
         {
             resArr.push( await searchApiDetails( arr[ i ].id ) )
         }
-
-        console.log( resArr );
         return resArr;
     }
 
@@ -94,10 +93,11 @@ export const SearchContainer = () =>
         event.preventDefault();
         try
         {
-
+            setLoading( true );
             const res = await searchApiFetch( searchInput );
-            if ( Object.keys( res ).length )
+            if ( Object.keys( res ).length > 0 )
             {
+                setLoading( false );
                 const detailedArr = await getDetailedArr( res.properties );
                 setSearchRes( detailedArr );
 
@@ -113,6 +113,7 @@ export const SearchContainer = () =>
         <div style={ container as CSSProperties }>
             <div style={ searchContainer }><Search searchInput={ searchInput } setSearchInput={ setSearchInput } handleSubmit={ handleSubmit } /></div>
             <div style={ selectionContainer }><Selection selection={ selection } /></div>
+            { loading == true && <TailSpin color="lightgrey" height={ 80 } width={ 80 } /> }
             { searchRes && searchRes.length > 0 &&
                 <div style={ resContainer }>
                     <PropertyFilter setFilter={ setFilter } filter={ filter } />

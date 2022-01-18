@@ -100,10 +100,8 @@ export const SearchResult = ( { searchRes, setSelection, selection }: { searchRe
 
     React.useEffect( () =>
     {
-        console.log( "checkedItems: ", checkedItems );
     }, [ checkedItems ] );
 
-    console.log( "SEARCH RES FROM SEARCH RESULT", searchRes )
     return (
         <div>
             <h2 style={ { textAlign: "left", fontSize: 14, fontWeight: "bold", marginBottom: 5 } }>Search result</h2>

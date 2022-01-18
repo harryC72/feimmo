@@ -44,7 +44,6 @@ const tableCtn = {
 
 export const Selection = ( { selection }: { selection: any } ) =>
 {
-    console.log( "SELECTION FROM SELECTION", selection );
 
     return (
         <div>
